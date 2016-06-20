@@ -12,7 +12,7 @@
 <%
    String config_file = System.getenv("config_file");
    System.out.println(config_file);		
-   InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(config_file);
+   FileInputStream inputStream = new FileInputStream(config_file);
    Properties p = new Properties();
    try {
    	p.load(inputStream);
