@@ -3,32 +3,23 @@
     Created on : Dec 21, 2015, 4:33:25 PM
     Author     : bruno
 --%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.Set"%>
 <%@page import="java.net.UnknownHostException"%>
 <%@page import="java.net.InetAddress"%>
 
-
 <%@page import="java.io.*"%>
-<%@page import="java.net.*" %>
+<%@page import="java.util.*"%>
 
 <%
-  String[] props = new String[5];
-  try{
-	String appConfig = System.getenv("CONFIG");
-	URL endpoint = new URL(appConfig);
-  	URLConnection connection = endpoint.openConnection();	
-  	BufferedReader buffread = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-  	
-	int i = 0;
-	String recv;
-  	while((recv = buffread.readLine()) != null) {
-		props[i] = recv;
-		i++;
-		
-	}
-  	buffread.close();
-   }catch(Exception ex){System.out.println(ex);}	
+   String config_file = System.getenv("config_file");
+   System.out.println(config_file);		
+   InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(config_file);
+   Properties p = new Properties();
+   try {
+   	p.load(inputStream);
+   }catch (IOException e) {
+	e.printStackTrace();
+   }
+
 %>
 
 <%
@@ -64,6 +55,12 @@
             <li>getServerName(): <%=request.getServerName()%></li>
         </ul>
 	<h1>Properties Information</h1>
-	<ul><% for(int i=0;i<5;i++) { %> <li><%=props[i]%></li> <%}%></ul>
-    </body>
+	<ul>
+		<li>DB_HOST:<%=p.getProperty("DB_HOST")%></li>
+		<li>DB_PORT:<%=p.getProperty("DB_PORT")%></li>
+		<li>DB_NAME:<%=p.getProperty("DB_NAME")%></li>
+		<li>DB_USER:<%=p.getProperty("DB_USER")%></li>
+		<li>DB_PW:<%=p.getProperty("DB_PW")%></li>
+	</ul>    
+	</body>
 </html>
