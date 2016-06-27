@@ -1,3 +1,4 @@
 From tomcat:8.0
 
 COPY sample /usr/local/tomcat/webapps/sample
+COPY container_scripts/* /opt/
