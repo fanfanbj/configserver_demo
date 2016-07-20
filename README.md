@@ -41,16 +41,16 @@
 		
 		＃准生产环境发布应用
 		docker run -p 8080:8080 
-		-e config_uri=http://IPADDR/pre-online.properties 
-		-e config_file=/opt/pre-online.properties 
-		-d sample:tomcat 
-		/bin/bash -c "/opt/loadconfig.sh;/usr/local/tomcat/bin/catalina.sh stop;/usr/local/tomcat/bin/catalina.sh run"
+			-e config_uri=http://IPADDR/pre-online.properties 
+			-e config_file=/opt/pre-online.properties 
+			-d sample:tomcat 
+			/bin/bash -c "/opt/loadconfig.sh;/usr/local/tomcat/bin/catalina.sh stop;/usr/local/tomcat/bin/catalina.sh run"
 			
 		＃生产环境发布应用
 		docker run -p 8080:8080 
-		-e config_uri=http://IPADDR/online.properties -e config_file=/opt/online.properties 
-		-d sample:tomcat 
-		/bin/bash -c "/opt/loadconfig.sh;/usr/local/tomcat/bin/catalina.sh stop;/usr/local/tomcat/bin/catalina.sh run"
+			-e config_uri=http://IPADDR/online.properties -e config_file=/opt/online.properties 
+			-d sample:tomcat 
+			/bin/bash -c "/opt/loadconfig.sh;/usr/local/tomcat/bin/catalina.sh stop;/usr/local/tomcat/bin/catalina.sh run"
 		
 		#-------------------------------------
 		# For Weblogic12.2.1
@@ -60,29 +60,29 @@
 		docker build -t sample:weblogic -f Dockerfile.weblogic .
 		#开发环境发布应用
 		docker run -p 8001:8001 
-		-e config_uri=http://IPADDR/dev.properties 
-		-e config_file=/opt/dev.properties
-		-d sample:weblogic
-		/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			-e config_uri=http://IPADDR/dev.properties 
+			-e config_file=/opt/dev.properties
+			-d sample:weblogic
+			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
 		
 		＃测试环境发布应用
 		docker run -p 8001:8001 
-		-e config_uri=http://IPADDR/test.properties 
-		-e config_file=/opt/test.properties
-		-d sample:weblogic
-		/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			-e config_uri=http://IPADDR/test.properties 
+			-e config_file=/opt/test.properties
+			-d sample:weblogic
+			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
 		
 		＃准生产环境发布应用
-		-e config_uri=http://IPADDR/pre-online.properties 
-		-e config_file=/opt/pre-online.properties
-		-d sample:weblogic
-		/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			-e config_uri=http://IPADDR/pre-online.properties 
+			-e config_file=/opt/pre-online.properties
+			-d sample:weblogic
+			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
 		
 		＃生产环境发布应用
-		-e config_uri=http://IPADDR/online.properties 
-		-e config_file=/opt/online.properties
-		-d sample:weblogic
-		/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			-e config_uri=http://IPADDR/online.properties 
+			-e config_file=/opt/online.properties
+			-d sample:weblogic
+			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
 		
 		
 3. TODO： 可以考虑构建配置管理服务提供get/refresh配置项等API，提供事件注册和通知，或加上zookeeper实现配置同步。
