@@ -61,28 +61,28 @@
 		#开发环境发布应用
 		docker run -p 8001:8001 
 			-e config_uri=http://IPADDR/dev.properties 
-			-e config_file=/opt/dev.properties
+			-e config_file=//u01/oracle/dev.properties
 			-d sample:weblogic
-			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			/bin/bash -c "/u01/oracle/loadconfig.sh;stopWebLogic.sh;startWebLogic.sh"
 		
 		＃测试环境发布应用
 		docker run -p 8001:8001 
 			-e config_uri=http://IPADDR/test.properties 
-			-e config_file=/opt/test.properties
+			-e config_file=/u01/oracle/test.properties
 			-d sample:weblogic
-			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			/bin/bash -c "/u01/oracle/loadconfig.sh;stopWebLogic.sh;startWebLogic.sh"
 		
 		＃准生产环境发布应用
 			-e config_uri=http://IPADDR/pre-online.properties 
-			-e config_file=/opt/pre-online.properties
+			-e config_file=/u01/oracle/pre-online.properties
 			-d sample:weblogic
-			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			/bin/bash -c "/u01/oracle/loadconfig.sh;stopWebLogic.sh;startWebLogic.sh"
 		
 		＃生产环境发布应用
 			-e config_uri=http://IPADDR/online.properties 
-			-e config_file=/opt/online.properties
+			-e config_file=/u01/oracle/online.properties
 			-d sample:weblogic
-			/bin/bash -c "/opt/loadconfig.sh;stopWeblogic.sh;startWeblogic.sh"
+			/bin/bash -c "/u01/oracle/loadconfig.sh;stopWebLogic.sh;startWebLogic.sh"
 		
 		
 3. TODO： 可以考虑构建配置管理服务提供get/refresh配置项等API，提供事件注册和通知，或加上zookeeper实现配置同步。
